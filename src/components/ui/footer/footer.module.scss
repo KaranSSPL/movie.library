@@ -1,0 +1,12 @@
+.bg_shape {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  z-index: -1;
+  img {
+    width: 100%;
+  }
+}

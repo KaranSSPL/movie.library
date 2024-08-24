@@ -1,0 +1,76 @@
+@import '../../variables';
+
+.add-edit {
+    .list-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 120px 0;
+        .headings {
+            display: flex;
+            align-items: center;
+                gap: 12px;
+                h2 {
+                    margin-bottom: 0;
+                }
+        }
+    }
+    .drop-form-wrapper {
+        display: flex;
+        & > * {
+            max-width: 50%;
+            flex-grow: 1;
+        }
+        .drop-bx {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: $input-clr;
+            border-radius: $radius;
+            border: 1px dashed $white;
+            cursor: pointer;
+            height: 504px;
+            max-width: 473px;
+            input[type='file'] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                opacity: 0;
+                cursor: pointer;
+            }
+            span {
+                font-size: 14px;
+                line-height: 24px;
+                font-weight: 400;
+                margin-top: 8px;
+            }
+        }
+        .movie-form {
+            padding: 0 119px;
+            .input-field {
+                margin-bottom: 24px;
+                .input {
+                    &.inline {
+                        width: auto;
+                    }
+                }
+            }
+        }
+        .button-wrapper {
+            display: flex;
+            gap: 16px;
+            margin-top: 64px;
+            .button {
+                flex-grow: 1;
+            }
+            &.desktop-hidden {
+                display: none;
+            }
+        }
+    }
+}
