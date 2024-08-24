@@ -1,7 +1,9 @@
 ## Getting Started
 
 First, Add credentials of PostgreSQL database in two files:
+
 ```needed Database Name, Username, password```
+
 1 for database seeding 
 file path: src\db\config\config.json
 
