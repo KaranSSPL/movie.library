@@ -23,6 +23,7 @@ async function dbConnect(): Promise<void> {
   try {
     // Attempt to authenticate to the database
     await sequelize.authenticate();
+
     connection.isConnected = true;
     console.log('Database connected successfully');
   } catch (error) {

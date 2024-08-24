@@ -7,18 +7,14 @@ import moment from 'moment';
 export const POST = async (req: NextRequest) => {
   try {
     const formData = await req.formData();
-    const fileEntry = formData.get('file') as File;
-    const metadata = formData.get('metadata') as string;
+    const fileEntry: File | null = formData.get('file') as File;
+    const metadata: string = formData.get('metadata') as string;
 
-    const token = req.cookies.get('token')?.value || '';
-    const userId = getUserIdFromToken(token);
+    const token: string = req.cookies.get('token')?.value || '';
+    const userId: string | null = getUserIdFromToken(token);
 
     if (!userId || isNaN(Number(userId))) {
       return errorResponse('Invalid userId.', 400);
-    }
-
-    if (!fileEntry || !(fileEntry instanceof File)) {
-      return errorResponse('No valid file received.', 400);
     }
 
     let parsedMetadata;
@@ -28,7 +24,11 @@ export const POST = async (req: NextRequest) => {
       return errorResponse('Invalid metadata format.', 400);
     }
 
-    const { title, publishingYear, movieId } = parsedMetadata;
+    const { title, publishingYear, movieId, image } = parsedMetadata;
+
+    if (movieId) {
+      if (!fileEntry && !image) return errorResponse('No valid file received.', 400);
+    } else if (!fileEntry) return errorResponse('No valid file received.', 400);
 
     if (!title || typeof title !== 'string') {
       return errorResponse('Invalid title.', 400);
@@ -39,7 +39,7 @@ export const POST = async (req: NextRequest) => {
       return errorResponse('Invalid publishing year.', 400);
     }
 
-    const filename = await saveFile(fileEntry);
+    const filename = fileEntry ? await saveFile(fileEntry) : image;
 
     if (movieId) {
       const existingMovie = await UserMovies.findOne({ where: { id: Number(movieId) } });

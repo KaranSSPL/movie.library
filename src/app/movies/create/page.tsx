@@ -3,9 +3,11 @@
 //libs
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // Custom Component
 import Footer from '@/components/ui/footer/footer';
+import image_file_download from '../../../assets/images/file-download.svg';
 
 // Styles
 import style from './page.module.scss';
@@ -66,7 +68,7 @@ function MovieCreation() {
       });
 
       if (response.ok) {
-        router.push('/movies/list');
+        router.push('/movies');
         // Clear the form or handle successful submission
         clearForm();
       } else {
@@ -78,40 +80,56 @@ function MovieCreation() {
       console.error('Error:', error);
     }
   };
-
   return (
     <>
-      <section className={style.add_edit}>
-        <div className={style.container}>
-          <div className={style.list_header}>
-            <div className={style.headings}>
-              <h2 className={style.title}>Create a new movie</h2>
+      <section className="add-edit">
+        <div className="container">
+          <div className="list-header">
+            <div className="headings">
+              <h2 className="title">Create a new movie</h2>
             </div>
           </div>
-          <div className={style.drop_form_wrapper}>
-            <div className={style.drop_bx}>
-              <input type="file" name="file" id="file" onChange={handleFileChange} />
-              <img src="images/file_download.svg" alt="download icon" />
+          <div className="drop-form-wrapper">
+            <div className="drop-bx">
+              <input type="file" name="file" id="file" onChange={handleFileChange} title="file" />
+              {file !== null && (
+                <Image
+                  src={URL.createObjectURL(file)}
+                  alt="Description of the image"
+                  // layout="responsive"
+                  width={473}
+                  height={504}
+                  objectFit="cover"
+                />
+              )}
+              <Image src={image_file_download} width={24} height={24} alt="download icon" />
               <span>Drop an image here</span>
             </div>
-            <div className={style.movie_form}>
-              <div className={style.input_field}>
-                <input type="text" placeholder="Title" className={style.input} value={title} onChange={handleTitleChange} />
+            <div className="movie-form">
+              <div className="input-field">
+                <input type="text" placeholder="Title" className="input" value={title} onChange={handleTitleChange} />
               </div>
-              <div className={style.input_field}>
+              <div className="input-field">
                 <input
                   type="text"
                   placeholder="Publishing year"
-                  className={`${style.input} ${style.inline}`}
+                  className={`input inline`}
                   value={publishingYear}
                   onChange={handlePublishingYearChange}
                 />
               </div>
-              <div className={`${style.button_wrapper} ${style.mobile_hidden}`}>
-                <button type="button" className={`${style.button} ${style.button_bordered}`} onClick={() => clearForm()}>
+              <div className={`button-wrapper mobile-hidden`}>
+                <button
+                  type="button"
+                  className={`button button-bordered`}
+                  onClick={() => {
+                    clearForm();
+                    router.push('/movies');
+                  }}
+                >
                   Cancel
                 </button>
-                <button type="button" className={`${style.button} ${style.button_green}`} onClick={handleSubmit}>
+                <button type="button" className={`button button-green`} onClick={handleSubmit}>
                   Submit
                 </button>
               </div>
