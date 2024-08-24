@@ -5,10 +5,10 @@ First, Add credentials of PostgreSQL database in two files:
 ```needed Database Name, Username, password```
 
 1 for database seeding 
-file path: src\db\config\config.json
+file path:  ```src\db\config\config.json```
 
 2. for database connection 
-file path: src\lib\dbConnect.ts
+file path: ```src\lib\dbConnect.ts```
 
 Run migration for PostgreSQL database:
 Migration will run with Sequelize CLI with directory: src\db\config
