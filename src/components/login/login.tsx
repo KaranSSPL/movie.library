@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useState, ChangeEvent, MouseEvent } from 'react';
 
 //styles and images
-import style from './login.module.scss';
 import '../../assets/scss/globals.scss';
 import bgShape from '@/assets/images/bg-shape.png';
 
@@ -29,6 +28,7 @@ export default function LoginPage() {
     emailError: '',
     passwordError: '',
   });
+  const [loading, setLoading] = useState(false); // Add loading state
 
   // Validate email format
   const validateEmail = (email: string): string => {
@@ -71,6 +71,8 @@ export default function LoginPage() {
       return; // Stop execution if there are validation errors
     }
 
+    setLoading(true); // Set loading to true when API call starts
+
     try {
       const response = await axios.post('/api/users/login', {
         email: formState.email,
@@ -79,7 +81,6 @@ export default function LoginPage() {
       if (response.status === 200) {
         router.push('/movies');
       } else {
-        // Handle API errors that do not throw exceptions
         setFormState((prevState) => ({
           ...prevState,
           error: 'Login failed. Please check your credentials.',
@@ -88,7 +89,6 @@ export default function LoginPage() {
         }));
       }
     } catch (err) {
-      // Handle API errors that throw exceptions
       const errorMessage = axios.isAxiosError(err)
         ? err.response?.data?.message || 'An error occurred. Please try again.'
         : 'An unexpected error occurred.';
@@ -99,6 +99,8 @@ export default function LoginPage() {
         emailError: '',
         passwordError: '',
       }));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -109,7 +111,14 @@ export default function LoginPage() {
           <h1 className="title">Sign in</h1>
           <form>
             <div className="input-field">
-              <input type="text" name="email" placeholder="Email" className="input" value={formState.email} onChange={handleInputChange} />
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                className="input"
+                value={formState.email}
+                onChange={handleInputChange}
+              />
               {formState.emailError && <p className="error">{formState.emailError}</p>}
             </div>
             <div className="input-field">
@@ -127,8 +136,8 @@ export default function LoginPage() {
               <input type="checkbox" name="check" id="check" />
               <label htmlFor="check">Remember me</label>
             </div>
-            <button type="button" className="button button-green" onClick={handleLogin}>
-              Login
+            <button type="button" className="button button-green" onClick={handleLogin} disabled={loading}>
+              {loading ? 'Please wait...' : 'Login'}
             </button>
           </form>
         </div>

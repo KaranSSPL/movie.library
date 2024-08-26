@@ -7,7 +7,7 @@ interface UserMoviesAttributes {
     userId?: number;
     image?: string;
     title?: string;
-    publishingYear?: Date;
+    publishingYear?: number;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -21,7 +21,7 @@ class UserMovies extends Model<UserMoviesAttributes, UserMoviesCreationAttribute
     public userId?: number;
     public image?: string;
     public title?: string;
-    public publishingYear?: Date;
+    public publishingYear?: number;
     public createdAt?: Date;
     public updatedAt?: Date;
 }
@@ -46,12 +46,12 @@ UserMovies.init({
         allowNull: true,
     },
     publishingYear: {
-        type: DataTypes.DATE,
+        type: DataTypes.INTEGER,
         allowNull: true,
     },
 }, {
     sequelize,
-    tableName: 'UserMovies', // Ensure table name is in plural or snake_case as per convention
+    tableName: 'UserMovies',
     timestamps: true,
 });
 

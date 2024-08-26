@@ -2,29 +2,32 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getUserIdFromToken, errorResponse } from '@/utils/utils';
 import UserMovies from '@/db/models/usermovies';
 
-export const GET = async (req: NextRequest, context: { params: { movieId: string } }) => {
+export const GET = async (req: NextRequest, { params }: { params: { movieId: string } }) => {
   try {
     const token = req.cookies.get('token')?.value || '';
-    const userId = Number(getUserIdFromToken(token));
-    const movieId = Number(context.params.movieId);
+    const userId = getUserIdFromToken(token);
 
-    if (!userId || isNaN(userId)) {
+    if (!userId || isNaN(Number(userId))) {
       return errorResponse('Invalid userId.', 400);
     }
 
-    if (!movieId || isNaN(movieId)) {
-      return errorResponse('Invalid movieId.', 400);
+    const movieId = Number(params.movieId);
+
+    if (isNaN(movieId)) {
+      return errorResponse('Invalid movie ID.', 400);
     }
 
-    const movie: UserMovies | null = await UserMovies.findOne({ where: { userId: userId, id: movieId } });
+    const movie = await UserMovies.findOne({
+      where: { userId: Number(userId), id: movieId },
+    });
 
-    if (movie === null) {
-      return errorResponse(`No movie found for movie Id ${movieId} and user Id ${userId}.`, 404);
+    if (!movie) {
+      return errorResponse('Movie not found.', 404);
     }
 
     return NextResponse.json(movie, { status: 200 });
   } catch (error) {
-    console.error('Error occurred while fetching movies:', error);
+    console.error('Error occurred while fetching movie details:', error);
     return errorResponse('Internal server error', 500);
   }
 };
