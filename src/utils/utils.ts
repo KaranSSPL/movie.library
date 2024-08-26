@@ -1,6 +1,7 @@
 // utils.ts
 import jwt from 'jsonwebtoken';
 import { writeFile } from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
 
 // Constants
@@ -29,6 +30,8 @@ export const saveFile = async (file: File): Promise<string> => {
   const fileExtension = path.extname(file.name);
   const filename = `${timestamp}${fileExtension}`;
   const buffer = Buffer.from(await file.arrayBuffer());
+  if (!fs.existsSync('public/')) fs.mkdirSync('public/');
+  if (!fs.existsSync('public/uploads/')) fs.mkdirSync('public/uploads/');
   await writeFile(path.join(process.cwd(), 'public/uploads/', filename), buffer);
   return filename;
 };

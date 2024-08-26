@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -18,6 +18,7 @@ body {
 img {
   max-width: 100%;
 }
+
 .bg-shape {
   position: fixed;
   bottom: 0;
@@ -27,21 +28,25 @@ img {
   display: flex;
   align-items: flex-end;
   z-index: -1;
+
   img {
     width: 100%;
     height: 100%;
   }
 }
+
 h1 {
   font-size: 64px;
   line-height: 80px;
 }
+
 h2 {
   font-size: 48px;
   line-height: 56px;
   margin-bottom: 40px;
   font-weight: 600;
 }
+
 .input {
   width: 100%;
   font-size: 14px;
@@ -52,15 +57,22 @@ h2 {
   border: 1px solid transparent;
   background-color: $input-clr;
   color: $white;
+
   &::placeholder {
     color: $white;
   }
+
+  ::-ms-input-placeholder {
+    color: $white;
+  }
+
   &:focus {
     color: $black;
     border-color: $input-clr;
     background-color: $white;
     caret-color: $input-clr;
   }
+
   &.error {
     border-color: $error-clr;
     background-color: $white;
@@ -68,11 +80,13 @@ h2 {
     caret-color: $error-clr;
   }
 }
+
 .container {
   padding: 0 24px;
   max-width: 1248px;
   margin: 0 auto;
 }
+
 .center {
   display: flex;
   flex-direction: column;
@@ -80,6 +94,7 @@ h2 {
   justify-content: center;
   height: 100vh;
 }
+
 .button {
   cursor: pointer;
   border: 1px solid transparent;
@@ -92,64 +107,121 @@ h2 {
   line-height: 24px;
   font-weight: $fw-700;
   border-radius: $radius;
+
   &.button-green {
     color: $white;
     background-color: $primary;
   }
+
   &.button-bordered {
     border-color: $white;
     color: $white;
     background-color: transparent;
   }
 }
+
 .sign-up {
   width: 100%;
   padding: 24px;
-  max-width: 332px;
+  max-width: 348px;
   text-align: center;
+
   .title {
     margin-bottom: 40px;
   }
+
   .input-field {
     margin-bottom: 24px;
   }
+
   .remember-text {
     margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    input[type='checkbox'] {
-      width: 18px;
+    display: inline-block;
+    padding-left: 24px;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 50%;
+      left: calc(50% - 64px);
+      transform: translate(-50%, -50%);
       height: 18px;
+      width: 18px;
+      background-color: $input-clr;
       border-radius: 5px;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+    }
+
+    &:hover input[type="checkbox"]~.checkmark {
+      background-color: #ccc;
+    }
+
+    input[type="checkbox"]:checked~.checkmark {
+      background-color: #2196F3;
+
+      &:after {
+        display: block;
+      }
+    }
+
+    .checkmark:after {
+      left: 6px;
+      top: 3px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
   }
+
   .button-green {
     width: 100%;
   }
 }
+
 .empty-list {
   text-align: center;
   padding: 0 24px;
 }
+
 .movie-list {
   .list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 120px 0;
+
     .headings {
       display: flex;
       align-items: center;
       gap: 12px;
+
       h2 {
         margin-bottom: 0;
       }
+
       .add {
         cursor: pointer;
       }
     }
+
     .logout {
       display: flex;
       align-items: center;
@@ -157,10 +229,12 @@ h2 {
       cursor: pointer;
     }
   }
+
   .list-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
+
     .movie-card {
       background-color: $card-bg;
       border-radius: 12px;
@@ -169,10 +243,12 @@ h2 {
       padding: 8px;
       cursor: pointer;
       transition: $transition;
+
       .card-image {
         height: 400px;
         overflow: hidden;
         border-radius: 12px;
+
         img {
           width: 100%;
           height: 100%;
@@ -181,33 +257,42 @@ h2 {
           transition: $transition;
         }
       }
+
       &:hover {
         background-color: $card-hvr-bg;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
         .card-image img {
           transform: scale(1.1);
         }
+
       }
+
       .movie-details {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         padding: 8px;
+
         .edit {
           margin-top: 6px;
         }
+
         .movie-name {
           font-size: 20px;
           line-height: 32px;
           font-weight: $fw-500;
           transition: $transition;
         }
+
         .releasing-date {
           font-size: 14px;
           line-height: 24px;
         }
       }
     }
+
+
   }
 }
 
@@ -257,21 +342,26 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 120px 0;
+
     .headings {
       display: flex;
       align-items: center;
       gap: 12px;
+
       h2 {
         margin-bottom: 0;
       }
     }
   }
+
   .drop-form-wrapper {
     display: flex;
-    & > * {
+
+    &>* {
       max-width: 50%;
       flex-grow: 1;
     }
+
     .drop-bx {
       position: relative;
       display: flex;
@@ -281,9 +371,47 @@ h2 {
       background-color: $input-clr;
       border-radius: $radius;
       border: 1px dashed $white;
-      cursor: pointer;
+      // cursor: pointer;
       height: 504px;
       max-width: 473px;
+
+      .preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+
+        img {
+          width: 250px;
+          height: 250px;
+          border-radius: 8px;
+          object-fit: cover;
+        }
+
+        span {
+          &.remove {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 30px;
+            height: 30px;
+            background: #df3c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+          }
+
+          &.title {
+            font-weight: 600;
+            color: #9efb9e;
+          }
+        }
+      }
+
       input[type='file'] {
         position: absolute;
         top: 0;
@@ -294,6 +422,7 @@ h2 {
         opacity: 0;
         cursor: pointer;
       }
+
       span {
         font-size: 14px;
         line-height: 24px;
@@ -301,10 +430,13 @@ h2 {
         margin-top: 8px;
       }
     }
+
     .movie-form {
       padding: 0 119px;
+
       .input-field {
         margin-bottom: 24px;
+
         .input {
           &.inline {
             width: auto;
@@ -312,13 +444,16 @@ h2 {
         }
       }
     }
+
     .button-wrapper {
       display: flex;
       gap: 16px;
       margin-top: 64px;
+
       .button {
         flex-grow: 1;
       }
+
       &.desktop-hidden {
         display: none;
       }
@@ -332,12 +467,14 @@ h2 {
       .movie-card {
         max-width: calc(51.2% - 24px);
         flex-basis: calc(51.2% - 24px);
+
         .card-image {
           height: 350px;
         }
       }
     }
   }
+
   .add-edit {
     .drop-form-wrapper {
       .movie-form {
@@ -346,39 +483,48 @@ h2 {
     }
   }
 }
+
 @media screen and (max-width: 768px) {
   .sign-up {
     max-width: 428px;
   }
+
   h1 {
     font-size: 48px;
     line-height: 56px;
   }
+
   h2 {
     font-size: 32px;
     line-height: 40px;
   }
+
   .movie-list {
     .list-header {
       padding: 80px 0;
+
       .logout {
         span {
           display: none;
         }
       }
     }
+
     .list-wrapper {
       .movie-card {
         max-width: calc(51.5% - 24px);
         flex-basis: calc(51.5% - 24px);
+
         .card-image {
           height: 246px;
         }
+
         .movie-details {
           .movie-name {
             font-size: 16px;
             line-height: 24px;
           }
+
           .edit {
             width: 15px;
           }
@@ -386,22 +532,28 @@ h2 {
       }
     }
   }
+
   .add-edit {
     .list-header {
       padding: 80px 0;
     }
+
     .drop-form-wrapper {
       flex-direction: column;
-      & > * {
+
+      &>* {
         max-width: 100%;
       }
+
       .drop-bx {
         max-width: 100%;
         order: 2;
       }
+
       .movie-form {
         padding: 0;
         order: 1;
+
         .input-field {
           .input {
             &.inline {
@@ -410,12 +562,15 @@ h2 {
           }
         }
       }
+
       .button-wrapper {
         order: 3;
         margin-top: 40px;
+
         &.mobile-hidden {
           display: none;
         }
+
         &.desktop-hidden {
           display: flex;
         }

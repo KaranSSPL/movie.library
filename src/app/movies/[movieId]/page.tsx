@@ -113,6 +113,11 @@ function MovieEdit() {
     }
   };
 
+  const handleRemoveImage = () => {
+    setFile(null);
+    setMovie((prev: Movie | null) => (prev !== null ? { ...prev, image: '' } : null));
+  };
+
   return (
     !loading &&
     movie !== null && (
@@ -126,17 +131,27 @@ function MovieEdit() {
             </div>
             <div className="drop-form-wrapper">
               <div className="drop-bx">
-                <input type="file" name="file" id="file" onChange={handleFileChange} title="file" />
-                <Image
-                  src={`/uploads/${movie.image}`}
-                  alt="Description of the image"
-                  // layout="responsive"
-                  width={473}
-                  height={504}
-                  objectFit="cover"
-                />
-                <Image src={image_file_download} width={24} height={24} alt="download icon" />
-                <span>Drop an image here</span>
+                {file !== null || (movie !== null && movie.image !== '') ? (
+                  <div className="preview">
+                    <Image
+                      src={file !== null ? URL.createObjectURL(file) : `/uploads/${movie.image}`}
+                      alt="Description of the image"
+                      width={250}
+                      height={250}
+                    />
+                    <span className="remove" onClick={() => handleRemoveImage()}>
+                      X
+                    </span>
+                    <span className="title">{file !== null ? file.name : movie.title}</span>
+                    {/* <span>size : 585mb</span> */}
+                  </div>
+                ) : (
+                  <>
+                    <input type="file" name="file" id="file" onChange={handleFileChange} title="file" />
+                    <Image src={image_file_download} width={24} height={24} alt="download icon" />
+                    <span>Drop an image here</span>
+                  </>
+                )}
               </div>
               <div className="movie-form">
                 <div className="input-field">
@@ -166,6 +181,21 @@ function MovieEdit() {
                     Submit
                   </button>
                 </div>
+              </div>
+              <div className={`button-wrapper desktop-hidden`}>
+                <button
+                  type="button"
+                  className={`button button-bordered`}
+                  onClick={() => {
+                    clearForm();
+                    router.push('/movies');
+                  }}
+                >
+                  Cancel
+                </button>
+                <button type="button" className={`button button-green`} onClick={handleSubmit}>
+                  Submit
+                </button>
               </div>
             </div>
           </div>

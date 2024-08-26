@@ -80,6 +80,11 @@ function MovieCreation() {
       console.error('Error:', error);
     }
   };
+
+  const handleRemoveImage = () => {
+    setFile(null);
+  };
+
   return (
     <>
       <section className="add-edit">
@@ -91,19 +96,22 @@ function MovieCreation() {
           </div>
           <div className="drop-form-wrapper">
             <div className="drop-bx">
-              <input type="file" name="file" id="file" onChange={handleFileChange} title="file" />
-              {file !== null && (
-                <Image
-                  src={URL.createObjectURL(file)}
-                  alt="Description of the image"
-                  // layout="responsive"
-                  width={473}
-                  height={504}
-                  objectFit="cover"
-                />
+              {file !== null ? (
+                <div className="preview">
+                  <Image src={URL.createObjectURL(file)} alt="Description of the image" width={250} height={250} />
+                  <span className="remove" onClick={() => handleRemoveImage()}>
+                    X
+                  </span>
+                  <span className="title">{file.name}</span>
+                  {/* <span>size : 585mb</span> */}
+                </div>
+              ) : (
+                <>
+                  <input type="file" name="file" id="file" onChange={handleFileChange} title="file" />
+                  <Image src={image_file_download} width={24} height={24} alt="download icon" />
+                  <span>Drop an image here</span>
+                </>
               )}
-              <Image src={image_file_download} width={24} height={24} alt="download icon" />
-              <span>Drop an image here</span>
             </div>
             <div className="movie-form">
               <div className="input-field">
@@ -133,6 +141,21 @@ function MovieCreation() {
                   Submit
                 </button>
               </div>
+            </div>
+            <div className={`button-wrapper desktop-hidden`}>
+              <button
+                type="button"
+                className={`button button-bordered`}
+                onClick={() => {
+                  clearForm();
+                  router.push('/movies');
+                }}
+              >
+                Cancel
+              </button>
+              <button type="button" className={`button button-green`} onClick={handleSubmit}>
+                Submit
+              </button>
             </div>
           </div>
         </div>
