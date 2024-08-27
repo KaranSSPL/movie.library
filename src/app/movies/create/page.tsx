@@ -168,7 +168,7 @@ function MovieCreation() {
                   type="text"
                   placeholder="Title"
                   value={title}
-                  className={`input ${errors.title ? 'input-error' : ''}`}
+                  className="input"
                   onChange={handleTitleChange}
                   maxLength={100}
                 />
@@ -179,7 +179,7 @@ function MovieCreation() {
                   type="text"
                   placeholder="Publishing year"
                   value={publishingYear}
-                  className={`input inline ${errors.publishingYear ? 'input-error' : ''}`}
+                  className="input inline"
                   onChange={handlePublishingYearChange}
                   maxLength={4} // Set max length for publishing year (YYYY)
                 />

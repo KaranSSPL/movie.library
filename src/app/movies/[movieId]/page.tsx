@@ -161,6 +161,7 @@ function MovieEdit() {
 
   const handleRemoveImage = () => {
     setFile(null);
+    setPreviewUrl(null)
   };
 
   return (
@@ -195,7 +196,7 @@ function MovieEdit() {
                 <input
                   type="text"
                   placeholder="Title"
-                  className={`input ${errors.title ? 'input-error' : ''}`}
+                  className="input"
                   value={title}
                   onChange={handleTitleChange}
                   maxLength={100} // Set max length for title
@@ -206,7 +207,7 @@ function MovieEdit() {
                 <input
                   type="text"
                   placeholder="Publishing year"
-                  className={`input inline ${errors.publishingYear ? 'input-error' : ''}`}
+                  className="input inline"
                   value={publishingYear}
                   onChange={handlePublishingYearChange}
                   maxLength={4} // Set max length for publishing year (YYYY)
