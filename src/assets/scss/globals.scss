@@ -241,7 +241,6 @@ h2 {
       max-width: calc(25.5% - 24px);
       flex: 1 1 calc(25.5% - 24px);
       padding: 8px;
-      cursor: pointer;
       transition: $transition;
 
       .card-image {
@@ -275,6 +274,7 @@ h2 {
         padding: 8px;
 
         .edit {
+          cursor: pointer;
           margin-top: 6px;
         }
 
