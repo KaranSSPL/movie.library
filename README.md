@@ -14,7 +14,8 @@ Run migration for PostgreSQL database:
 Migration will run with Sequelize CLI with directory: src\db\config
 ```
 npx sequelize-cli init
-
+```
+```
 npx sequelize-cli db:migrate
 ```
 
