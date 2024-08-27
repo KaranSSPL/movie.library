@@ -1,4 +1,3 @@
-// app/api/movies/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserIdFromToken, errorResponse } from '@/utils/utils';
 import UserMovies from '@/db/models/usermovies';

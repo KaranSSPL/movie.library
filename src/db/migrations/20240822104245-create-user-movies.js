@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       publishingYear: {
-        type: Sequelize.DATE
+        type: Sequelize.INTEGER 
       },
       createdAt: {
         allowNull: false,

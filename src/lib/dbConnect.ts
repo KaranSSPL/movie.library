@@ -7,10 +7,11 @@ type ConnectionObject = {
 
 const connection: ConnectionObject = {};
 
-const sequelize = new Sequelize('movies', 'postgres', 'enter', {
-  dialect: 'postgres',
+const sequelize = new Sequelize(process.env.DB_NAME || '', process.env.DB_USERNAME || '', process.env.DB_PASSWORD || '', {
+  dialect: process.env.DB_DIALECT as 'postgres',
+  host: process.env.DB_HOST,
   logging: false,
-  dialectModule: pg,
+  dialectModule: pg
 });
 
 async function dbConnect(): Promise<void> {
@@ -23,14 +24,15 @@ async function dbConnect(): Promise<void> {
   try {
     // Attempt to authenticate to the database
     await sequelize.authenticate();
-
     connection.isConnected = true;
+
     console.log('Database connected successfully');
   } catch (error) {
     console.error('Database connection failed:', error);
+
     // Graceful exit in case of a connection error
     process.exit(1);
   }
 }
 
-export { sequelize, dbConnect };
+export {sequelize, dbConnect};
