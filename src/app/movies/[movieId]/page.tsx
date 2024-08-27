@@ -35,6 +35,9 @@ function MovieEdit() {
           setPublishingYear(String(movie.publishingYear));
           setExistingImage(movie.image); // Store the existing image filename
           setPreviewUrl(`/uploads/${movie.image}`);
+        } else if (response.status === 404) {
+          // Redirect to the default 404 page if movie not found
+          router.push('/404');
         } else {
           console.error('Failed to fetch movie details:', response.statusText);
         }
