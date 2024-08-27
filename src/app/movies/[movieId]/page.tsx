@@ -161,7 +161,7 @@ function MovieEdit() {
 
   const handleRemoveImage = () => {
     setFile(null);
-    setPreviewUrl(null)
+    setPreviewUrl(null);
   };
 
   return (
@@ -175,10 +175,9 @@ function MovieEdit() {
           </div>
           <div className="drop-form-wrapper">
             <div className="drop-bx">
-              <input type="file" name="my-file" id="my-file" onChange={handleFileChange} />
               {previewUrl ? (
-                <div className="preview-image-wrapper">
-                  <Image src={previewUrl} alt="Selected image" layout="fill" objectFit="cover" className="preview-image" />
+                <div className="preview">
+                  <Image src={previewUrl} alt="Selected image" width={250} height={250} />
                   <span className="remove" onClick={() => handleRemoveImage()}>
                     X
                   </span>
@@ -186,7 +185,8 @@ function MovieEdit() {
                 </div>
               ) : (
                 <>
-                  <Image src={fileDownloadIcon} alt="download icon" />
+                  <input type="file" name="my-file" id="my-file" onChange={handleFileChange} title="file" />
+                  <Image src={fileDownloadIcon} width={24} height={24} alt="download icon" />
                   <span>Drop an image here</span>
                 </>
               )}
