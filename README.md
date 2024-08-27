@@ -2,26 +2,78 @@
 
 First, Add credentials of PostgreSQL database in two files:
 
-```needed Database Name, Username, password```
+`needed Database Name, Username, password`
 
-1. for database seeding 
-file path:  ```src\db\config\config.js```
+1. for database seeding
+   file path: `src\db\config\config.js`
 
-2. for database connection 
-file path: ```src\lib\dbConnect.ts```
+2. for database connection
+   file path: `src\lib\dbConnect.ts`
 
 Run migration for PostgreSQL database:
 Migration will run with Sequelize CLI with directory: src\db\config
+
 ```
 npx sequelize-cli init
 ```
+
 ```
-npx sequelize-cli db:migrate
+# or
+yarn migrate
+# or
+pnpm migrate
+# or
+bun migrate
 ```
 
-Run database seeding for default user: 
+Run database seeding for default user:
+
 ```
-npx sequelize-cli db:seed:all
+npm run seed
+# or
+yarn seed
+# or
+pnpm seed
+# or
+bun seed
+
+```
+
+`Rollback Last Migration`
+
+```
+npm run migration:rollback
+# or
+yarn migration:rollback
+# or
+pnpm migration:rollback
+# or
+bun migration:rollback
+
+```
+
+`Rollback All Migrations`
+
+```
+npm run migration:rollback:all
+# or
+yarn migration:rollback:all
+# or
+pnpm migration:rollback:all
+# or
+bun migration:rollback:all
+```
+
+`Rollback Seed Data`
+
+```
+npm run seed:rollback
+# or
+yarn seed:rollback
+# or
+pnpm seed:rollback
+# or
+bun seed:rollback
 ```
 
 Now all set next Run the development server:
