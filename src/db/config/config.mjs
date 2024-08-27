@@ -1,25 +1,31 @@
 'use strict';
-module.exports = {
+
+const config = {
   development: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    dialect: 'postgres',
   },
   test: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    dialect: 'mysql',
     logging: false,
   },
   production: {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
-    dialect: process.env.DB_DIALECT,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    },
   },
 };
+
+export default config;

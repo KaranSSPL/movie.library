@@ -6,12 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migration:create": "dotenv -- sequelize-cli migration:create",
+    "migrate": "dotenv -- sequelize-cli db:migrate",
+    "migration:rollback": "dotenv -- sequelize-cli db:migrate:undo",
+    "migration:rollback:all": "dotenv -- sequelize-cli db:migrate::undo:all",
+    "seed": "dotenv -- sequelize-cli db:seed:all",
+    "seed:rollback": "dotenv -- sequelize-cli db:seed:undo"
   },
   "dependencies": {
     "axios": "^1.7.4",
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
+    "dotenv-cli": "^7.4.2",
     "jsonwebtoken": "^9.0.2",
     "next": "14.2.6",
     "pg": "^8.12.0",
@@ -22,6 +28,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
