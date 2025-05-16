@@ -24,7 +24,7 @@
     "pg-hstore": "^2.3.4",
     "react": "^18",
     "react-dom": "^18",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
