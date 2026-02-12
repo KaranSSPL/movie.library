@@ -15,7 +15,7 @@
     "seed:rollback": "dotenv -- sequelize-cli db:seed:undo"
   },
   "dependencies": {
-    "axios": "^1.8.4",
+    "axios": "^1.13.5",
     "bcrypt": "^5.1.1",
     "dotenv-cli": "^7.4.2",
     "jsonwebtoken": "^9.0.2",
